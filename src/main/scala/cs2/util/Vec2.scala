@@ -1,13 +1,7 @@
 package cs2.util
-<<<<<<< HEAD
-//
-=======
-
->>>>>>> f14f5ee50d2a9ccc0ba8e8a7de82f6336338185f
 class Vec2 (var x:Double, var y:Double) {
   /** DO NOT MODIFY THE FOLLOWING TOSTRING METHOD **/
   override def toString():String = "("+x+","+y+")"
-  
   //Methods for addition and subtraction of vectors
   def +  (other:Vec2):Vec2 = {
     if(this.x !=0 && this.y !=0 && other.x != 0 && other.y !=0){
@@ -140,3 +134,4 @@ object Vec2 {
      if(startPoint.x < 0 && startPoint.y < 0) println(-startPoint.y + " S, "+ -startPoint.x+" W")
   }
 }
+//just a comment line to check the github
