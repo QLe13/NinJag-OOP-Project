@@ -1,5 +1,5 @@
-//package cs2.util
-
+package cs2.util
+//
 class Vec2 (var x:Double, var y:Double) {
   /** DO NOT MODIFY THE FOLLOWING TOSTRING METHOD **/
   override def toString():String = "("+x+","+y+")"
