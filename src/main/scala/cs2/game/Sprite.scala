@@ -17,20 +17,26 @@ abstract class Sprite (protected val img:Image, protected var pos:Vec2) {
    *  @param direction - an offset that the position of the sprite should be moved by
    *  @return none/Unit
    */
-  def move (direction:Vec2):Unit = { }
+  def move (direction:Vec2):Unit = {
+    pos += direction
+   }
   
   /** moves the sprite to a specific location specified by a vector (not a relative movement)
    *  
    *  @param location - the new location for the sprite's position
    *  @return none/Unit
    */
-  def moveTo (location:Vec2):Unit = { }
+  def moveTo (location:Vec2):Unit = {
+    pos = location
+   }
   
   /** Method to display the sprite at its current location in the specified Graphics2D context
    *  
    *  @param g - a GraphicsContext object capable of drawing the sprite
    *  @return none/Unit
    */
-  def display (g:GraphicsContext):Unit = { }
-  
+  def display (g:GraphicsContext,W:Double,H:Double):Unit = {
+    g.drawImage(img,pos.x,pos.y,W,H)
+  }
+
 }

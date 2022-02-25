@@ -18,19 +18,33 @@ class Player(avatar:Image, initPos:Vec2, private val bulletPic:Image) extends Sp
    *
    *  @return none/Unit
    */
-  def moveLeft():Unit = { }
+  var x = initPos.x
+  var y = initPos.y
+  def moveLeft():Unit = {
+      move(new Vec2(-10,0))
+      x = initPos.x
+      y = initPos.y
+  }
 
   /** moves the player sprite one "step" to the right (see note above)
    *
    *  @return none/Unit
    */
-  def moveRight():Unit = { }
+  def moveRight():Unit = {
+      move(new Vec2(10,0))
+      x = initPos.x
+      y = initPos.y
+  }
 
   /** creates a new Bullet instance beginning from the player, with an
    *  appropriate velocity
    *
    *  @return Bullet - the newly created Bullet object that was fired
    */
-  def shoot():Bullet = { ??? }
+  def shoot():Bullet = {
+    val bulInitPos = new Vec2(30,-30) + initPos
+    val vel = new Vec2(0,20)
+    new Bullet(Images.Rasengan,bulInitPos,vel)
+  }
 
 }
