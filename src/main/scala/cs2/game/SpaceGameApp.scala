@@ -10,6 +10,7 @@ import scalafx.scene.input.KeyEvent
 import scalafx.scene.input.KeyCode
 import scalafx.scene.paint.Color
 import scalafx.animation.AnimationTimer
+import scalafx.animation.Animation
 
 /** main object that initiates the execution of the game, including construction
  *  of the window.
@@ -21,6 +22,7 @@ object Images {
     val Rasengan = new Image("images/Rasengan.png")
     val Shuriken = new Image("images/Shuriken.png")
     val Shinobi = new Image("images/Shinobi.png")
+    val Background = new Image("images/Background.jpeg")
 }
 object SpaceGameApp extends JFXApp {
     stage = new JFXApp.PrimaryStage{
@@ -39,6 +41,7 @@ object SpaceGameApp extends JFXApp {
             val shuW = 15
             val shuH = 35
             val player = new Player(Images.Naruto,initpos, Images.Rasengan)
+        
             canvas.onKeyPressed =(e:KeyEvent) => {
                 if (e.code == KeyCode.Left){
                     if(player.x>=0){
@@ -70,6 +73,11 @@ object SpaceGameApp extends JFXApp {
                 
             }
             canvas.requestFocus() 
+            val timer4 = AnimationTimer (t => {
+                player.display(g,narW,narH)
+            })
+            timer4.start()
+
             val enemies = new EnemySwarm(2,4)
             val timer3 = AnimationTimer (t =>{
                 enemies.display(g)
@@ -79,7 +87,7 @@ object SpaceGameApp extends JFXApp {
             val timer1 = AnimationTimer (t=>{
                 val eneShoot = enemies.shoot()
                 eneCount += 0.25
-                if(eneCount%5==0.0){val timer2 = AnimationTimer (t=>{
+                if(eneCount%6==0.0){val timer2 = AnimationTimer (t=>{
                     g.drawImage(Images.Shuriken,eneShoot.x,eneShoot.y,shuW,shuH)
                 var initY = eneShoot.y - shuH
                         eneShoot.y -= eneShoot.dash.y

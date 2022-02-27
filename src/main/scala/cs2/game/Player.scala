@@ -21,7 +21,7 @@ class Player(avatar:Image, initPos:Vec2, private val bulletPic:Image) extends Sp
   var x = initPos.x
   var y = initPos.y
   def moveLeft():Unit = {
-      move(new Vec2(-10,0))
+      move(new Vec2(-20,0))
       x = initPos.x
       y = initPos.y
   }
@@ -31,7 +31,7 @@ class Player(avatar:Image, initPos:Vec2, private val bulletPic:Image) extends Sp
    *  @return none/Unit
    */
   def moveRight():Unit = {
-      move(new Vec2(10,0))
+      move(new Vec2(20,0))
       x = initPos.x
       y = initPos.y
   }
