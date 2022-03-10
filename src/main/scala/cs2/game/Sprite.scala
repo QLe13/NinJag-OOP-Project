@@ -40,3 +40,4 @@ abstract class Sprite (protected val img:Image, protected var pos:Vec2) {
   }
 
 }
+//

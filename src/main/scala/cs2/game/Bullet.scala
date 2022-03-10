@@ -27,3 +27,4 @@ class Bullet(pic:Image, var initPos:Vec2, private var vel:Vec2) extends Sprite(p
   }
   
 }
+////
