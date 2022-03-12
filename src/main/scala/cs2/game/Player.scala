@@ -42,8 +42,8 @@ class Player(avatar:Image, initPos:Vec2, private val bulletPic:Image) extends Sp
    *  @return Bullet - the newly created Bullet object that was fired
    */
   def shoot():Bullet = {
-    val bulInitPos = new Vec2(30,-30) + initPos
-    val vel = new Vec2(0,20)
+    val bulInitPos = new Vec2(30,-10) + initPos
+    val vel = new Vec2(0,-20)
     new Bullet(Images.Rasengan,bulInitPos,vel)
   }
 

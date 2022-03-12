@@ -17,8 +17,8 @@ class Enemy(pic:Image, initPos:Vec2, private val bulletPic:Image) extends Sprite
    *  @return Bullet - the newly created Bullet object that was fired
    */
   def shoot():Bullet = {
-    val vel = new Vec2(0,-30)
-    new Bullet(Images.Shuriken,initPos + new Vec2(15,37),vel)
+    val vel = new Vec2(0,30)
+    new Bullet(Images.Shuriken,initPos + new Vec2(15,15),vel)
   }
 
 }
