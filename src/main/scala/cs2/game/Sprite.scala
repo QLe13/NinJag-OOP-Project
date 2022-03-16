@@ -29,14 +29,22 @@ abstract class Sprite (protected val img:Image, protected var pos:Vec2) {
   def moveTo (location:Vec2):Unit = {
     pos = location
    }
-  
   /** Method to display the sprite at its current location in the specified Graphics2D context
    *  
    *  @param g - a GraphicsContext object capable of drawing the sprite
    *  @return none/Unit
    */
+  
   def display (g:GraphicsContext,W:Double,H:Double):Unit = {
     g.drawImage(img,pos.x,pos.y,W,H)
+  }
+  var intersection: Boolean = false
+  def intersects (width1:Int, height1: Int, width2:Int, height2:Int, location: Vec2) {
+    if (!((this.pos.x+width1 < location.x) || (this.pos.x > location.x+width2)) && !((this.pos.y+height1 < location.y) || (this.pos.y > location.y+height2))) {
+       intersection = true
+    } else {
+      intersection = false
+    }
   }
 
 }

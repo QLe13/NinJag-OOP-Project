@@ -17,15 +17,15 @@ class EnemySwarm(private val nRows:Int, private val nCols:Int) {
    *  @param g - the GraphicsContext to draw into
    *  @return none/Unit
    */
-  var enemies = List[Enemy]()
+  var swarm = collection.mutable.ListBuffer.empty[Enemy]
   for(r <- 1 to nRows){
     for(c <- 1 to nCols){
-      enemies ::= new Enemy(Images.Shinobi,Vec2(200*c+(r-1)*50,40+100*r),Images.Shuriken)      
+      swarm += new Enemy(Images.Shinobi,Vec2(200*c+(r-1)*50,40+100*r),Images.Shuriken)      
     }
   }
 
   def display(g:GraphicsContext):Unit = {
-    for (p <- enemies){
+    for (p <- swarm){
       p.display(g,40,40)
     }
   }
@@ -36,9 +36,12 @@ class EnemySwarm(private val nRows:Int, private val nCols:Int) {
    *
    *  @return Bullet - the newly created Bullet object fired from the swarm
    */
-  var arr = Array.range(0,nCols*nRows)
+  var arr = Array.range(0,swarm.length)
   def shoot():Bullet = {
-    enemies(arr(Random.nextInt(arr.size))).shoot()
+    swarm(arr(Random.nextInt(arr.size))).shoot()
   }
+  def omit(e:Enemy):Unit={
+    swarm -= e
+  }//gotta figure out why my swarm does not shoot after the second enemy got removed
 
 }

@@ -31,58 +31,132 @@ object SpaceGameApp extends JFXApp {
             val canvas = new Canvas(width.value, height.value)
             content = canvas
             val g = canvas.graphicsContext2D
+            //
             val narW = 80
             val narH = 80
-            val initpos = new util.Vec2(width.value/2-narW/2,height.value-narH)
+            //
             val bulW = 20
             val bulH = 18
+            //
             val shiW = 40
             val shiH = 40
+            //
             val shuW = 15
             val shuH = 35
-            val player = new Player(Images.Naruto,initpos, Images.Rasengan)
+
+
+            val player = new Player(Images.Naruto,util.Vec2(width.value/2-narW/2, height.value - narH), Images.Rasengan)
             var pBuls = collection.mutable.ListBuffer.empty[Bullet]
             var eBuls = collection.mutable.ListBuffer.empty[Bullet]
-            var eneCount:Double = 0
+            var KeyLog = collection.mutable.Set.empty[String]
+            //
+            var deadCount:Int = 0
+            var eneBulCount:Double = 20
             canvas.onKeyPressed =(e:KeyEvent) => {
-                if (e.code == KeyCode.Left){
-                    if(player.x>=0){
-                    player.moveLeft()
-                    }
-                }
-                if (e.code == KeyCode.Right){
-                    if(player.x<=width.value-narW){
-                    player.moveRight()
-                    }
-                }
-                if (e.code == KeyCode.Space){
-                    pBuls += player.shoot()
-                }
+                KeyLog += e.code.toString()
                  } 
                  canvas.requestFocus()
-                val enemies = new EnemySwarm(2,4)
-            val timerAll = AnimationTimer (t =>{
+            canvas.onKeyReleased =(e:KeyEvent)=>{
+                KeyLog -= e.code.toString()
+            }
+            canvas.requestFocus()
+
+            var enemies = new EnemySwarm(2,4)
+            
+            val timerAll = AnimationTimer {t =>{
             g.drawImage(Images.Background,0,0,width.value,height.value)
                 player.display(g,narW,narH)
                 for (i<- pBuls){
-                    i.timeStep()
+                    if(i.y>=0){
+                        i.timeStep()
+                        i.display(g,bulW,bulH)
+                    } else {
+                        pBuls -= i
+                    }
                 }
-                for(i <-0 to pBuls.length -1){
-                    pBuls(i).display(g,bulW,bulH)
-                }
+                //can create a for loop to eliminate the overranged bullets
                 enemies.display(g)
-                eneCount += 0.25
-                if(eneCount%6==0){
+                eneBulCount -= 0.25
+                if(eneBulCount==0){
                     eBuls += enemies.shoot()
+                    eneBulCount = 20
                 }
-                for (i <- eBuls){
-                    i.timeStep()
+                if (KeyLog("LEFT") == true){
+                    if(player.x>=10){
+                    player.moveLeft()
+                    }
+                }
+                if (KeyLog("RIGHT") == true){
+                    if(player.x<=width.value-narW-20){
+                    player.moveRight()
+                    }
+                }
+                if (KeyLog("UP") == true){
+                    if(player.y>=0){
+                    player.moveUp()
+                    }
+                }
+                if (KeyLog("DOWN") == true){
+                    if(player.y<=height.value-narH-20){
+                    player.moveDown()
+                    }
+                }
+                if (KeyLog("SPACE") == true && pBuls.length == 0){
+                    pBuls += player.shoot()
+                }
+                for (i<- eBuls){
+                    if(i.y>=0){
+                        i.timeStep()
+                        i.display(g,shuW,shuH)
+                    } else {
+                        eBuls -= i
+                    }
+                }
+                for (p<- pBuls){
+                    for(e <- eBuls){
+                        p.intersects(bulW,bulH,shuW,shuH,new util.Vec2(e.x,e.y))
+                        if(p.intersection==true){
+                            pBuls -= p
+                            eBuls -= e
+                            }
+                        }
+                    }
+                for (e <- eBuls){
+                    player.intersects(narW-10,narH,shiW-15,shiH-10,new util.Vec2(e.x,e.y))
+                    if(player.intersection==true){
+                        player.moveTo(util.Vec2(520,550))
+                        eBuls -= e
+                        player.intersection = false
+                        deadCount += 1   
+                    }
+                }
+                for (e <- enemies.swarm){
+                    player.intersects(narW-10,narH,shiW-15,shiH-10,new util.Vec2(e.x,e.y))
+                    if(player.intersection==true){
+                        player.moveTo(util.Vec2(520,550))
+                        player.intersection = false
+                        deadCount += 1   
+                    }
                     
                 }
-                for (i <- 0 to eBuls.length-1){
-                    eBuls(i).display(g,shuW,shuH)
+               
+                for (e <- enemies.swarm){
+                    for (p <- pBuls){
+                    e.intersects(shiW,shiH-20,bulW,bulH,util.Vec2(p.x(),p.y()))
+                    if(e.intersection == true){
+                        enemies.omit(e)
+                        enemies.arr = Array.range(0,enemies.swarm.length)
+                        pBuls -= p
+                    }
+                    }
                 }
-            })
+                if(enemies.swarm.length==0){
+                    enemies = new EnemySwarm(2,4)
+                }
+
+            //Dont touch the line below this cause these are ending braces        
+            }
+            }
             timerAll.start()
         } 
    

@@ -17,8 +17,12 @@ class Bullet(pic:Image, var initPos:Vec2, private var vel:Vec2) extends Sprite(p
    * 
    *  @return none/Unit
    */
-  var x = initPos.x
-  var y = initPos.y
+  def x():Double={
+    pos.x
+  }
+  def y():Double={
+    pos.y
+  }
 
   val dash = vel
   val Pic = pic
