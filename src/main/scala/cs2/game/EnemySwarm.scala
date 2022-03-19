@@ -40,8 +40,6 @@ class EnemySwarm(private val nRows:Int, private val nCols:Int) {
   def shoot():Bullet = {
     swarm(arr(Random.nextInt(arr.size))).shoot()
   }
-  def omit(e:Enemy):Unit={
-    swarm -= e
-  }//gotta figure out why my swarm does not shoot after the second enemy got removed
+  
 
 }

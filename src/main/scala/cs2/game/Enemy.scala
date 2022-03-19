@@ -23,7 +23,7 @@ class Enemy(pic:Image, initPos:Vec2, private val bulletPic:Image) extends Sprite
     pos.y
   }
   def shoot():Bullet = {
-    val vel = new Vec2(0,15)//20
+    val vel = new Vec2(0,5)//20
     new Bullet(Images.Shuriken,pos + new Vec2(15,15),vel)
   }
 

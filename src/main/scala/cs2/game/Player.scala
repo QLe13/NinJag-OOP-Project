@@ -55,7 +55,7 @@ class Player(avatar:Image, initPos:Vec2, private val bulletPic:Image) extends Sp
    */
   def shoot():Bullet = {
     val bulInitPos = new Vec2(30,-10) + pos
-    val vel = new Vec2(0,-20)
+    val vel = new Vec2(0,-15)
     new Bullet(bulletPic,bulInitPos,vel)
   }
 
