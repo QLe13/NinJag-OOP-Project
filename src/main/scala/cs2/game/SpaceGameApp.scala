@@ -52,6 +52,7 @@ object SpaceGameApp extends JFXApp {
             var pBuls = mutable.ListBuffer.empty[Bullet]
             var eBuls = mutable.ListBuffer.empty[Bullet]
             var KeyLog = collection.mutable.Set.empty[String]
+            var eneBulToAdd = mutable.ListBuffer.empty[Bullet]
             //
             var deadCount:Int = 0
             var eneBulCount:Double = 20
