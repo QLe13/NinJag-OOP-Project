@@ -169,7 +169,7 @@ object SpaceGameApp extends JFXApp {
             }
             }
             timerAll.start()
-        } 
+        } //
    
     }
 
