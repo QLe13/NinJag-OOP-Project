@@ -1,4 +1,5 @@
-# CS2hw-F21
+# Scala Space Game App 
 
-This is the repository that you will be using to develop and turn in all homework assignments for the semester.
+Run on JavaGUI with sbt
+
 
