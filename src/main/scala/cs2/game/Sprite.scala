@@ -17,6 +17,7 @@ abstract class Sprite (protected val img:Image, protected var pos:Vec2) {
    *  @param direction - an offset that the position of the sprite should be moved by
    *  @return none/Unit
    */
+ 
   def move (direction:Vec2):Unit = {
     pos += direction
    }
@@ -46,6 +47,7 @@ abstract class Sprite (protected val img:Image, protected var pos:Vec2) {
       intersection = false
     }
   }
+  
 
 }
 //

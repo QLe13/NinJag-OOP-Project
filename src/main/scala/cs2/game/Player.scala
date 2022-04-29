@@ -58,5 +58,9 @@ class Player(avatar:Image, initPos:Vec2, private val bulletPic:Image) extends Sp
     val vel = new Vec2(0,-15)
     new Bullet(bulletPic,bulInitPos,vel)
   }
+  override def clone():Player = {
+    val player = new Player(avatar,initPos.clone(),bulletPic)
+    player
+  }
 
 }

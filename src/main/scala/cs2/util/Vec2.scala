@@ -67,7 +67,9 @@ class Vec2 (var x:Double, var y:Double) {
   }
 
   //A clone operator can be useful when making "deep" copies of objects
-  override def clone():Vec2 = { ??? }
+  override def clone():Vec2 = {
+  new Vec2(this.x,this.y) 
+  }
 }
 
 object Vec2 {

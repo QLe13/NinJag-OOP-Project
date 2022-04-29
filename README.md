@@ -1,3 +1,4 @@
-Just the random game made by scala
+# CS2hw-F21
 
-Run by sbt
+This is the repository that you will be using to develop and turn in all homework assignments for the semester.
+

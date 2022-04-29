@@ -29,6 +29,10 @@ class Bullet(pic:Image, var initPos:Vec2, private var vel:Vec2) extends Sprite(p
   def timeStep():Unit = {
     move(vel)
   }
+  override def clone():Bullet = {
+    var bullet:Bullet = new Bullet(pic,initPos.clone(),vel.clone())
+    bullet
+  }
   
 }
 ////

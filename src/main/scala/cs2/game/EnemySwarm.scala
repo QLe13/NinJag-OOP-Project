@@ -18,15 +18,24 @@ class EnemySwarm(private val nRows:Int, private val nCols:Int) {
    *  @return none/Unit
    */
   var swarm = collection.mutable.ListBuffer.empty[Enemy]
+  
   for(r <- 1 to nRows){
     for(c <- 1 to nCols){
-      swarm += new Enemy(Images.Shinobi,Vec2(200*c+(r-1)*50,40+100*r),Images.Shuriken)      
+      swarm += new Enemy(Images.Shinobi,Vec2(200*c+(r-1)*50,100*r),Images.Shuriken)      
     }
   }
+
 
   def display(g:GraphicsContext):Unit = {
     for (p <- swarm){
       p.display(g,40,40)
+    }
+  }
+  
+  var direction:Vec2 = new Vec2(0,0)
+  def beStatic():Unit = {
+    for(e <- swarm){
+    e.beStatic()
     }
   }
 
@@ -40,6 +49,7 @@ class EnemySwarm(private val nRows:Int, private val nCols:Int) {
   def shoot():Bullet = {
     swarm(arr(Random.nextInt(arr.size))).shoot()
   }
+  
   
 
 }
